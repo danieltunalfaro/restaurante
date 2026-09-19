@@ -12,6 +12,10 @@
         comidas: Comida[]
     }>()
 
+    const emit = defineEmits<{
+        agregar: []
+    }>()
+
 </script>
 
 <template>
@@ -25,7 +29,7 @@
         >
 
             <div class="imagen-card">
-                {{ comida.imagen }}
+                <img :src="comida.imagen" :alt="comida.nombre">
             </div>
 
             <div class="contenido-card">
@@ -37,6 +41,14 @@
                 <span>Disponibles: {{ comida.inventario }}</span>
                 <strong>${{ comida.precio }}</strong>
             </div>
+
+            <button
+                class="boton-carrito"
+                type="button"
+                @click="emit('agregar')"
+            >
+                Agregar al carrito
+            </button>
 
         </article>
 
@@ -73,6 +85,12 @@
     min-height: 140px;
 }
 
+.imagen-card img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+}
+
 .contenido-card {
     display: flex;
     flex-direction: column;
@@ -89,6 +107,19 @@
     display: flex;
     justify-content: space-between;
     margin-top: auto;
+}
+
+.boton-carrito {
+    background: #111;
+    border: 1px solid #111;
+    color: white;
+    cursor: pointer;
+    padding: 0.75rem 1rem;
+    width: 100%;
+}
+
+.boton-carrito:hover {
+    background: #333;
 }
 
 </style>
